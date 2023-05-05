@@ -3,25 +3,25 @@ import logo from './logo.svg'
 import './App.css'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import { BuyFlow, Home } from './containers'
-import { ProductIds } from './constants'
+import { PRODUCT_IDS, ROUTES } from './constants'
 
 const App = () => (
   <Router>
     <div className="App">
       <header className="App-header">
-        <Link to="/">
+        <Link to={ROUTES.HOME}>
           <img src={logo} className="App-logo" alt="logo" />
         </Link>
       </header>
 
       <Switch>
-        <Route path="/buy/insurance_developer">
-          <BuyFlow productId={ProductIds.DEVELOPER_INSURANCE} />
+        <Route path={ROUTES.DEVELOPER}>
+          <BuyFlow productId={PRODUCT_IDS.DEVELOPER_INSURANCE} />
         </Route>
-        <Route path="/buy/insurance_designer">
-          <BuyFlow productId={ProductIds.DEVELOPER_INSURANCE} />
+        <Route path={ROUTES.DESIGNER}>
+          <BuyFlow productId={PRODUCT_IDS.DEVELOPER_INSURANCE} />
         </Route>
-        <Route path="/">
+        <Route path={ROUTES.HOME}>
           <Home />
         </Route>
       </Switch>
