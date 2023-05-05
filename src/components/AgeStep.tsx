@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 interface AgeStepProps {
-    next: (field: string, value: number) => void
+  next: (field: string, value: number) => void
 }
 
 const AgeStep = ({ next }: AgeStepProps) => {
@@ -16,7 +16,7 @@ const AgeStep = ({ next }: AgeStepProps) => {
             setAge(Number(value))
           }}
           value={age}
-        ></input>
+        />
       </div>
       <button onClick={() => next('age', age)}>Next</button>
     </>

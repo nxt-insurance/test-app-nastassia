@@ -1,15 +1,12 @@
 import React, { useState } from 'react'
-import AgeStep from './AgeStep'
-import EmailStep from './EmailStep'
-import SummaryStep from './SummaryStep'
+import AgeStep from '../components/AgeStep'
+import EmailStep from '../components/EmailStep'
+import SummaryStep from '../components/SummaryStep'
+import { ProductIds } from '../constants'
+import {Link} from "react-router-dom";
 
 interface BuyFlowProps {
   productId: ProductIds
-}
-
-export enum ProductIds {
-  DEVELOPER_INSURANCE = 'dev_ins',
-  DESIGN_INSURANCE = 'design_insurance',
 }
 
 const PRODUCT_IDS_TO_NAMES = {
@@ -17,7 +14,7 @@ const PRODUCT_IDS_TO_NAMES = {
   [ProductIds.DESIGN_INSURANCE]: 'Designer Insurance',
 }
 
-const BuyFlow = (props: BuyFlowProps) => {
+export const BuyFlow = ({ productId }: BuyFlowProps) => {
   const [currentStep, setStep] = useState('email')
   const [collectedData, updateData] = useState({
     email: '',
@@ -29,8 +26,11 @@ const BuyFlow = (props: BuyFlowProps) => {
   }
   return (
     <>
-      <h4>Buying {PRODUCT_IDS_TO_NAMES[props.productId]}</h4>
-      {(currentStep === 'email' && <EmailStep next={getStepCallback('age')} />) ||
+      <Link to="/">⬅️Back</Link>
+      <h4>Buying {PRODUCT_IDS_TO_NAMES[productId]}</h4>
+      {(currentStep === 'email' && (
+        <EmailStep next={getStepCallback('age')} />
+      )) ||
         (currentStep === 'age' && (
           <AgeStep next={getStepCallback('summary')} />
         )) ||
@@ -40,5 +40,3 @@ const BuyFlow = (props: BuyFlowProps) => {
     </>
   )
 }
-
-export default BuyFlow

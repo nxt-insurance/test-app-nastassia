@@ -1,12 +1,12 @@
 .App {
   text-align: center;
   background-color: #b9e3bd;
-  height: 100vmin;
+  height: 100vh;
 }
 
 .App-logo {
   height: 4vmin;
-  pointer-events: none;
+  cursor: pointer;
 }
 
 @media (prefers-reduced-motion: no-preference) {
