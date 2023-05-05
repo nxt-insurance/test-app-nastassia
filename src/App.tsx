@@ -2,7 +2,7 @@ import React from 'react'
 import logo from './logo.svg'
 import './App.css'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
-import Buyflow, { ProductIds } from './buyflow/Buyflow'
+import BuyFlow, { ProductIds } from './buyflow/BuyFlow'
 
 const App = () => {
   return (
@@ -13,10 +13,10 @@ const App = () => {
         </header>
         <Switch>
           <Route path="/buy/insurance_dev">
-            <Buyflow productId={ProductIds.devIns} />
+            <BuyFlow productId={ProductIds.DEVELOPER_INSURANCE} />
           </Route>
           <Route path="/">
-            <p>Welcome to Getsafe's Developer Insurance</p>
+            <p>Welcome to Getsafe&apos;s Developer Insurance</p>
             <Link to="/buy/insurance_dev">Get started!</Link>
           </Route>
         </Switch>

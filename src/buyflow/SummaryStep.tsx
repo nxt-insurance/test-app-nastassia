@@ -8,11 +8,11 @@ interface SummaryStepProps {
   }
 }
 
-const SummaryStep: React.FC<SummaryStepProps> = (props) => {
+const SummaryStep = ({ collectedData }: SummaryStepProps) => {
   return (
     <>
-      <div>Email: {props.collectedData.email}</div>
-      <div>Age: {props.collectedData.age}</div>
+      <div>Email: {collectedData.email}</div>
+      <div>Age: {collectedData.age}</div>
       <div>
         <Link to="/purchased=dev_ins">Purchase</Link>
       </div>
