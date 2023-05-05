@@ -19,7 +19,7 @@ export const EmailStep = () => {
           onChange={({ target: { value } }) => {
             setValidationError(
               // Only show validation error when user started typing.
-              // Not ideal, but for simplicity this is better than no validation at all.
+              // Not ideal UX, but for simplicity this is better than no validation at all.
               Boolean(value && !EMAIL_REGEXP_PATTERN.test(value))
             )
             setEmail(value)

@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 
-type AgeStepProps = {
-  next: (field: string, value: number) => void
-}
+import { StepContext } from '../contexts'
+import { PURCHASE_STEPS } from '../constants'
 
-export const AgeStep = ({ next }: AgeStepProps) => {
+export const AgeStep = () => {
+  const { setStepValue, values } = useContext(StepContext)
+
   const [age, setAge] = useState(0)
+
   return (
     <>
       <div>
@@ -18,7 +20,20 @@ export const AgeStep = ({ next }: AgeStepProps) => {
           value={age}
         />
       </div>
-      <button onClick={() => next('age', age)}>Next</button>
+      <button
+        disabled={!age}
+        onClick={() =>
+          setStepValue({
+            values: {
+              ...values,
+              ...{ [PURCHASE_STEPS.AGE]: age },
+            },
+            step: PURCHASE_STEPS.NAME,
+          })
+        }
+      >
+        Next
+      </button>
     </>
   )
 }
