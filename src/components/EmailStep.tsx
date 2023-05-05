@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 
-interface EmailStepProps {
-  next: (field: string, value: string) => void
-}
+import { StepContext } from '../contexts'
+import { PURCHASE_STEPS } from '../constants'
 
-const EmailStep = ({ next }: EmailStepProps) => {
+export const EmailStep = () => {
   const [email, setEmail] = useState('')
+  const { setStepValue, values } = useContext(StepContext)
+
   return (
     <>
       <div>
@@ -18,9 +19,20 @@ const EmailStep = ({ next }: EmailStepProps) => {
           value={email}
         ></input>
       </div>
-      <button onClick={() => next('email', email)}>Next</button>
+
+      <button
+        onClick={() =>
+          setStepValue({
+            values: {
+              ...values,
+              ...{ [PURCHASE_STEPS.EMAIL]: email },
+            },
+            step: PURCHASE_STEPS.AGE,
+          })
+        }
+      >
+        Next
+      </button>
     </>
   )
 }
-
-export default EmailStep

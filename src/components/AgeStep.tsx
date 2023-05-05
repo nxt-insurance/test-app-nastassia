@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 
-interface AgeStepProps {
+type AgeStepProps = {
   next: (field: string, value: number) => void
 }
 
-const AgeStep = ({ next }: AgeStepProps) => {
+export const AgeStep = ({ next }: AgeStepProps) => {
   const [age, setAge] = useState(0)
   return (
     <>
@@ -22,5 +22,3 @@ const AgeStep = ({ next }: AgeStepProps) => {
     </>
   )
 }
-
-export default AgeStep

@@ -1,42 +1,52 @@
 import React, { useState } from 'react'
-import AgeStep from '../components/AgeStep'
-import EmailStep from '../components/EmailStep'
-import SummaryStep from '../components/SummaryStep'
-import { PRODUCT_IDS, ROUTES } from '../constants'
 import { Link } from 'react-router-dom'
 
-interface BuyFlowProps {
-  productId: PRODUCT_IDS
-}
+import {
+  StepContext,
+  defaultStepContextVal,
+  StepContextType,
+} from '../contexts'
+import { PRODUCT_IDS, PURCHASE_STEPS, ROUTES } from '../constants'
+import { AgeStep, EmailStep, SummaryStep, NameStep } from '../components'
 
 const PRODUCT_IDS_TO_NAMES = {
   [PRODUCT_IDS.DEVELOPER_INSURANCE]: 'Developer Insurance',
   [PRODUCT_IDS.DESIGN_INSURANCE]: 'Designer Insurance',
 }
 
+const STEPS_COMPONENTS: { [key in PRODUCT_IDS]: any } = {
+  [PRODUCT_IDS.DEVELOPER_INSURANCE]: {
+    [PURCHASE_STEPS.EMAIL]: EmailStep,
+    [PURCHASE_STEPS.AGE]: AgeStep,
+    [PURCHASE_STEPS.SUMMARY]: SummaryStep,
+  },
+  [PRODUCT_IDS.DESIGN_INSURANCE]: {
+    [PURCHASE_STEPS.EMAIL]: EmailStep,
+    [PURCHASE_STEPS.AGE]: AgeStep,
+    [PURCHASE_STEPS.NAME]: NameStep,
+    [PURCHASE_STEPS.SUMMARY]: SummaryStep,
+  },
+}
+
+type BuyFlowProps = {
+  productId: PRODUCT_IDS
+}
+
 export const BuyFlow = ({ productId }: BuyFlowProps) => {
-  const [currentStep, setStep] = useState('email')
-  const [collectedData, updateData] = useState({
-    email: '',
-    age: 0,
-  })
-  const getStepCallback = (nextStep: string) => (field: string, value: any) => {
-    updateData({ ...collectedData, [field]: value })
-    setStep(nextStep)
-  }
+  const [stepsData, setStepValue] = useState<
+    Omit<StepContextType, 'setStepValue'>
+  >(defaultStepContextVal)
+
+  const StepComponent = STEPS_COMPONENTS[productId][stepsData.step]
+
   return (
     <>
       <Link to={ROUTES.HOME}>⬅️Back</Link>
       <h4>Buying {PRODUCT_IDS_TO_NAMES[productId]}</h4>
-      {(currentStep === 'email' && (
-        <EmailStep next={getStepCallback('age')} />
-      )) ||
-        (currentStep === 'age' && (
-          <AgeStep next={getStepCallback('summary')} />
-        )) ||
-        (currentStep === 'summary' && (
-          <SummaryStep collectedData={collectedData} />
-        ))}
+
+      <StepContext.Provider value={{ ...defaultStepContextVal, setStepValue }}>
+        <StepComponent />
+      </StepContext.Provider>
     </>
   )
 }

@@ -1,14 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-interface SummaryStepProps {
+type SummaryStepProps = {
   collectedData: {
     email: string
     age: number
   }
 }
 
-const SummaryStep = ({ collectedData }: SummaryStepProps) => {
+export const SummaryStep = ({ collectedData }: SummaryStepProps) => {
   return (
     <>
       <div>Email: {collectedData.email}</div>
@@ -19,5 +19,3 @@ const SummaryStep = ({ collectedData }: SummaryStepProps) => {
     </>
   )
 }
-
-export default SummaryStep
