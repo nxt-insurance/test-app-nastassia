@@ -11,10 +11,12 @@ export type StepContextType = {
   }
   setStepValue: (values: Omit<StepContextType, 'setStepValue'>) => void
 }
-export const defaultStepContextVal: StepContextType = {
+export const defaultStepContextVal: Omit<StepContextType, 'setStepValue'> = {
   step: PURCHASE_STEPS.EMAIL,
   values: { [PURCHASE_STEPS.EMAIL]: '', [PURCHASE_STEPS.AGE]: '' },
-  setStepValue: (values) => values,
 }
 
-export const StepContext = createContext<StepContextType>(defaultStepContextVal)
+export const StepContext = createContext<StepContextType>({
+  ...defaultStepContextVal,
+  setStepValue: (values) => values,
+})
