@@ -5,30 +5,27 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import { BuyFlow, Home } from './containers'
 import { ProductIds } from './constants'
 
-const App = () => {
-  return (
-    <Router>
-      <div className="App">
-        <header className="App-header">
-          <Link to="/">
-            <img src={logo} className="App-logo" alt="logo" />
-          </Link>
-        </header>
-        <Switch>
-          <Route path="/buy/insurance_developer">
-            <BuyFlow productId={ProductIds.DEVELOPER_INSURANCE} />
-          </Route>
-          <Route path="/buy/insurance_designer">
-            <BuyFlow productId={ProductIds.DEVELOPER_INSURANCE} />
-          </Route>
+const App = () => (
+  <Router>
+    <div className="App">
+      <header className="App-header">
+        <Link to="/">
+          <img src={logo} className="App-logo" alt="logo" />
+        </Link>
+      </header>
 
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
-  )
-}
-
+      <Switch>
+        <Route path="/buy/insurance_developer">
+          <BuyFlow productId={ProductIds.DEVELOPER_INSURANCE} />
+        </Route>
+        <Route path="/buy/insurance_designer">
+          <BuyFlow productId={ProductIds.DEVELOPER_INSURANCE} />
+        </Route>
+        <Route path="/">
+          <Home />
+        </Route>
+      </Switch>
+    </div>
+  </Router>
+)
 export default App
