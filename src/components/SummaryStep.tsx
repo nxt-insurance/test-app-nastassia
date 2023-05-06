@@ -1,20 +1,30 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 
-type SummaryStepProps = {
-  collectedData: {
-    email: string
-    age: number
-  }
-}
+import { StepContext, defaultStepContextVal } from '../contexts'
 
-export const SummaryStep = ({ collectedData }: SummaryStepProps) => {
+export const SummaryStep = () => {
+  const {
+    setStepValue,
+    values: { email, age, name },
+  } = useContext(StepContext)
+
   return (
     <>
-      <div>Email: {collectedData.email}</div>
-      <div>Age: {collectedData.age}</div>
+      <div>Email: {email}</div>
+      <div>Age: {age}</div>
+      {name && (
+        <div>
+          Name: {name.firstName} {name.lastName}
+        </div>
+      )}
       <div>
-        <Link to="/purchased=dev_ins">Purchase</Link>
+        <Link
+          to="/purchased=dev_ins"
+          onClick={() => setStepValue(defaultStepContextVal)}
+        >
+          Purchase
+        </Link>
       </div>
     </>
   )

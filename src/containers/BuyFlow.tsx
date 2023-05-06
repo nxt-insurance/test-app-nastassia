@@ -14,7 +14,8 @@ const PRODUCT_IDS_TO_NAMES = {
   [PRODUCT_IDS.DESIGN_INSURANCE]: 'Designer Insurance',
 }
 
-const STEPS_COMPONENTS: { [key in PRODUCT_IDS]: any } = { // TODO: TYPE ME!
+const STEPS_COMPONENTS: { [key in PRODUCT_IDS]: any } = {
+  // TODO: TYPE ME!
   [PRODUCT_IDS.DEVELOPER_INSURANCE]: {
     [PURCHASE_STEPS.EMAIL]: EmailStep,
     [PURCHASE_STEPS.AGE]: AgeStep,
@@ -44,7 +45,7 @@ export const BuyFlow = ({ productId }: BuyFlowProps) => {
       <Link to={ROUTES.HOME}>⬅️Back</Link>
       <h4>Buying {PRODUCT_IDS_TO_NAMES[productId]}</h4>
 
-      <StepContext.Provider value={{ ...defaultStepContextVal, setStepValue }}>
+      <StepContext.Provider value={{ ...stepsData, setStepValue }}>
         <StepComponent />
       </StepContext.Provider>
     </>

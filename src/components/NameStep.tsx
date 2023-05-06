@@ -1,12 +1,13 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 
-type NameStepProps = {
-  next: (field: string, value: number) => void
-}
+import { StepContext } from '../contexts'
+import { PURCHASE_STEPS } from '../constants'
 
-export const NameStep = ({ next }: NameStepProps) => {
-  const [firstName, setFirstName] = useState(0)
-  const [lastName, setLastName] = useState(0)
+export const NameStep = () => {
+  const { setStepValue, values } = useContext(StepContext)
+
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
   return (
     <>
       <div>
@@ -14,19 +15,32 @@ export const NameStep = ({ next }: NameStepProps) => {
         <input
           type="text"
           onChange={({ target: { value } }) => {
-            setFirstName(Number(value))
+            setFirstName(value)
           }}
           value={firstName}
         />
         <input
           type="text"
           onChange={({ target: { value } }) => {
-            setLastName(Number(value))
+            setLastName(value)
           }}
           value={lastName}
         />
       </div>
-      <button onClick={() => next('summary', firstName)}>Next</button>
+      <button
+        disabled={!firstName || !lastName}
+        onClick={() =>
+          setStepValue({
+            values: {
+              ...values,
+              ...{ [PURCHASE_STEPS.NAME]: { firstName, lastName } },
+            },
+            step: PURCHASE_STEPS.SUMMARY,
+          })
+        }
+      >
+        Next
+      </button>
     </>
   )
 }
