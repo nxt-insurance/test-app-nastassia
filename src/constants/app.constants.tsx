@@ -1,6 +1,6 @@
 export enum PRODUCT_IDS {
   DEVELOPER_INSURANCE = 'dev_insurance',
-  DESIGN_INSURANCE = 'design_insurance',
+  DESIGNER_INSURANCE = 'designer_insurance',
 }
 
 export enum PURCHASE_STEPS {
@@ -9,3 +9,15 @@ export enum PURCHASE_STEPS {
   NAME = 'name',
   SUMMARY = 'summary',
 }
+
+export const DEVELOPER_PURCHASE_STEPS: PURCHASE_STEPS[] = [
+  PURCHASE_STEPS.EMAIL,
+  PURCHASE_STEPS.AGE,
+  PURCHASE_STEPS.SUMMARY,
+]
+export const DESIGNER_PURCHASE_STEPS: PURCHASE_STEPS[] = [
+  PURCHASE_STEPS.EMAIL,
+  PURCHASE_STEPS.AGE,
+  PURCHASE_STEPS.NAME,
+  PURCHASE_STEPS.SUMMARY,
+]

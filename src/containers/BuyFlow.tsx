@@ -5,28 +5,32 @@ import {
   StepContext,
   defaultStepContextVal,
   StepContextType,
+  StepValuesType,
 } from '../contexts'
-import { PRODUCT_IDS, PURCHASE_STEPS, ROUTES } from '../constants'
+import {
+  PRODUCT_IDS,
+  PURCHASE_STEPS,
+  ROUTES,
+  DEVELOPER_PURCHASE_STEPS,
+  DESIGNER_PURCHASE_STEPS,
+} from '../constants'
 import { AgeStep, EmailStep, SummaryStep, NameStep } from '../components'
 
-const PRODUCT_IDS_TO_NAMES = {
+const PRODUCT_IDS_TO_NAMES: { [key in PRODUCT_IDS]: string } = {
   [PRODUCT_IDS.DEVELOPER_INSURANCE]: 'Developer Insurance',
-  [PRODUCT_IDS.DESIGN_INSURANCE]: 'Designer Insurance',
+  [PRODUCT_IDS.DESIGNER_INSURANCE]: 'Designer Insurance',
 }
 
-const STEPS_COMPONENTS: { [key in PRODUCT_IDS]: any } = {
-  // TODO: TYPE ME!
-  [PRODUCT_IDS.DEVELOPER_INSURANCE]: {
-    [PURCHASE_STEPS.EMAIL]: EmailStep,
-    [PURCHASE_STEPS.AGE]: AgeStep,
-    [PURCHASE_STEPS.SUMMARY]: SummaryStep,
-  },
-  [PRODUCT_IDS.DESIGN_INSURANCE]: {
-    [PURCHASE_STEPS.EMAIL]: EmailStep,
-    [PURCHASE_STEPS.AGE]: AgeStep,
-    [PURCHASE_STEPS.NAME]: NameStep,
-    [PURCHASE_STEPS.SUMMARY]: SummaryStep,
-  },
+const STEPS_COMPONENTS: { [key in PURCHASE_STEPS]: () => JSX.Element } = {
+  [PURCHASE_STEPS.EMAIL]: EmailStep,
+  [PURCHASE_STEPS.AGE]: AgeStep,
+  [PURCHASE_STEPS.NAME]: NameStep,
+  [PURCHASE_STEPS.SUMMARY]: SummaryStep,
+}
+
+const STEPS: { [key in PRODUCT_IDS]: PURCHASE_STEPS[] } = {
+  [PRODUCT_IDS.DEVELOPER_INSURANCE]: DEVELOPER_PURCHASE_STEPS,
+  [PRODUCT_IDS.DESIGNER_INSURANCE]: DESIGNER_PURCHASE_STEPS,
 }
 
 type BuyFlowProps = {
@@ -34,11 +38,22 @@ type BuyFlowProps = {
 }
 
 export const BuyFlow = ({ productId }: BuyFlowProps) => {
-  const [stepsData, setStepValue] = useState<
+  const [stepsData, setStepsData] = useState<
     Omit<StepContextType, 'setStepValue'>
-  >(defaultStepContextVal)
+  >({
+    ...defaultStepContextVal,
+    step: STEPS[productId][0],
+  })
 
-  const StepComponent = STEPS_COMPONENTS[productId][stepsData.step]
+  const setStepValue = (values: StepValuesType) => {
+    const currentStepIndex = STEPS[productId].indexOf(stepsData.step)
+    setStepsData({
+      values,
+      ...{ step: STEPS[productId][currentStepIndex + 1] },
+    })
+  }
+
+  const StepComponent = STEPS_COMPONENTS[stepsData.step]
 
   return (
     <>

@@ -19,7 +19,7 @@ const App = () => (
           <BuyFlow productId={PRODUCT_IDS.DEVELOPER_INSURANCE} />
         </Route>
         <Route path={ROUTES.DESIGNER}>
-          <BuyFlow productId={PRODUCT_IDS.DESIGN_INSURANCE} />
+          <BuyFlow productId={PRODUCT_IDS.DESIGNER_INSURANCE} />
         </Route>
         <Route path={ROUTES.HOME}>
           <Home />

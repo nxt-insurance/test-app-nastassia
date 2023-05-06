@@ -31,11 +31,8 @@ export const NameStep = () => {
         disabled={!firstName || !lastName}
         onClick={() =>
           setStepValue({
-            values: {
-              ...values,
-              ...{ [PURCHASE_STEPS.NAME]: { firstName, lastName } },
-            },
-            step: PURCHASE_STEPS.SUMMARY,
+            ...values,
+            ...{ [PURCHASE_STEPS.NAME]: { firstName, lastName } },
           })
         }
       >

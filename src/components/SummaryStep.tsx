@@ -1,13 +1,19 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
-import { StepContext, defaultStepContextVal } from '../contexts'
+import { StepContext, defaultStepValues } from '../contexts'
+import { ROUTES } from '../constants'
 
+const SUCCESS_URL: { [key in string]: string } = {
+  [ROUTES.DEVELOPER]: 'insurance_developer',
+  [ROUTES.DESIGNER]: 'insurance_designer',
+}
 export const SummaryStep = () => {
   const {
     setStepValue,
     values: { email, age, name },
   } = useContext(StepContext)
+  const location = useLocation()
 
   return (
     <>
@@ -20,8 +26,8 @@ export const SummaryStep = () => {
       )}
       <div>
         <Link
-          to="/purchased=dev_ins"
-          onClick={() => setStepValue(defaultStepContextVal)}
+          to={`/purchased=${SUCCESS_URL[location.pathname]}`}
+          onClick={() => setStepValue(defaultStepValues)}
         >
           Purchase
         </Link>

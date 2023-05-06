@@ -21,14 +21,11 @@ export const AgeStep = () => {
         />
       </div>
       <button
-        disabled={!age}
+        disabled={age < 1}
         onClick={() =>
           setStepValue({
-            values: {
-              ...values,
-              ...{ [PURCHASE_STEPS.AGE]: age },
-            },
-            step: PURCHASE_STEPS.NAME,
+            ...values,
+            ...{ [PURCHASE_STEPS.AGE]: age },
           })
         }
       >

@@ -39,11 +39,8 @@ export const EmailStep = () => {
         disabled={validationError || !email}
         onClick={() =>
           setStepValue({
-            values: {
-              ...values,
-              ...{ [PURCHASE_STEPS.EMAIL]: email },
-            },
-            step: PURCHASE_STEPS.AGE,
+            ...values,
+            ...{ [PURCHASE_STEPS.EMAIL]: email },
           })
         }
       >
