@@ -13,6 +13,7 @@ export type StepContextType = {
   values: StepValuesType
   setStepValue: (values: StepValuesType) => void
 }
+
 export const defaultStepContextVal: Omit<StepContextType, 'setStepValue'> = {
   step: PURCHASE_STEPS.EMAIL,
   values: { [PURCHASE_STEPS.EMAIL]: '', [PURCHASE_STEPS.AGE]: 0 },

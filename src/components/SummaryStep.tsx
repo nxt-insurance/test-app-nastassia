@@ -8,6 +8,7 @@ const SUCCESS_URL: { [key in string]: string } = {
   [ROUTES.DEVELOPER]: 'insurance_developer',
   [ROUTES.DESIGNER]: 'insurance_designer',
 }
+
 export const SummaryStep = () => {
   const {
     setStepValue,
