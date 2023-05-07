@@ -18,6 +18,8 @@ export const NameStep = () => {
             setFirstName(value)
           }}
           value={firstName}
+          name="firstName"
+          aria-label="firstName"
         />
         <input
           type="text"
@@ -25,6 +27,8 @@ export const NameStep = () => {
             setLastName(value)
           }}
           value={lastName}
+          name="lastName"
+          aria-label="lastName"
         />
       </div>
       <button

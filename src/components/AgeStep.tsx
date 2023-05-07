@@ -18,6 +18,8 @@ export const AgeStep = () => {
             setAge(Number(value))
           }}
           value={age}
+          name="age"
+          aria-label="age"
         />
       </div>
       <button

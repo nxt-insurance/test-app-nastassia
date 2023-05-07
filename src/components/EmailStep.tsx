@@ -25,7 +25,9 @@ export const EmailStep = () => {
             setEmail(value)
           }}
           value={email}
-        ></input>
+          name="email"
+          aria-label="email"
+        />
       </div>
 
       {validationError && (
